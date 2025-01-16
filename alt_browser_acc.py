@@ -11,13 +11,13 @@ LOOP_INTERVAL = 1.0
 LOOO_DURATION = 180.0
 
 # global
-loopCount = 0
-lastStatus = 'WJ'
+gLoopCount = 0
+gLastStatus = 'WJ'
 
 
 def printWaitJudge():
 
-    status_text = lastStatus
+    status_text = gLastStatus.strip()
 
     spinner_chars = ['-', '\\', '|', '/']
 
@@ -27,7 +27,7 @@ def printWaitJudge():
     else:
         msg += status_text
 
-    msg += ' ' + spinner_chars[loopCount%4]
+    msg += ' ' + spinner_chars[gLoopCount%4]
     
     print( '\r                    ', end='', flush=True ) 
     print( msg, end='', flush=True )
@@ -61,7 +61,7 @@ def printResult(soup, td_tag):
 
 
 def loadUrl(url):
-    global lastStatus
+    global gLastStatus
 
     html = urllib.request.urlopen(url)
     soup = BeautifulSoup(html, "html.parser")
@@ -69,7 +69,7 @@ def loadUrl(url):
     td_tag = soup.find('td', id='judge-status')
     text_judge_status = td_tag.find('span').get_text() if td_tag else None
 
-    lastStatus = text_judge_status
+    gLastStatus = text_judge_status
 
     if '/' in text_judge_status:
         printWaitJudge()
@@ -87,16 +87,16 @@ def loadUrl(url):
 
 def main():
 
-    global loopCount
+    global gLoopCount
 
     url = sys.argv[1]
 
     startTime = time.time()
     while time.time() - startTime < LOOO_DURATION:
-        loopCount += 1
+        gLoopCount += 1
         time.sleep(LOOP_INTERVAL)
 
-        if loopCount % 3 == 1:
+        if gLoopCount % 3 == 1:
             ret = loadUrl(url)
             if ret == 1:
                 break
