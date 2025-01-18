@@ -30,5 +30,5 @@ make && make install
 BROWSER 環境変数に適用して acc コマンドを実行します。
 
 ```bash
-$ BROWSER=alt_blowser_acc acc
+$ BROWSER=alt_blowser_acc acc s
 ```
