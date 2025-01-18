@@ -1,10 +1,34 @@
 # alt_browser_acc
 
 atcoder_cli (acc) を使用した AtCoder への提出結果を取得して CLI 上に表示するための Web スクレイピングスクリプトです。
-termux や CLI での使用を想定したシンプルなLinuxコンテナで使用することを想定しています。
+[termux](https://github.com/termux/termux-app) を使用して作成したコーディング環境で自分で使用するために作成したものです。
 
-pyinstaller でコンパイルした実行ファイルを以下のように使用することを想定して作成しています。
+## インストール手順
 
+termux 内で使用することを前提とします。
+
+1. このリポジトリを clone します。
+
+```bash
+git clone https://github.com/DaisukeTK/alt_browser_acc
 ```
-$ BROWSER=alt_blowser_acc acc submit
+
+2. プロジェクトのディレクトリに移動します
+
+```bash
+cd alt_browser_acc
+```
+
+3. make を叩いてビルド後、インストールします(pyinstaller が必要です)
+
+```bash
+make && make install
+```
+
+## Usage
+
+BROWSER 環境変数に適用して acc コマンドを実行します。
+
+```bash
+$ BROWSER=alt_blowser_acc acc
 ```
